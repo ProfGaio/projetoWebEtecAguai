@@ -1,6 +1,9 @@
+//IMPORTANDO MODEL PARA MONGODB DO CLIENTE 
 const Cliente = require('../models/Cliente')
+//IMPORTANDO MÓDULOS NECESSÁRIOS DO NODE 
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 // IMPORTANDO HELPERS
 const createUserToken = require('../helpers/create-user-token') 
 const getToken = require('../helpers/get-token')
@@ -87,7 +90,6 @@ module.exports = class ClienteController{
                 mensagem: "A senha é obrigatória"})
             return
         } 
-        
         const cliente = await Cliente.findOne({email: email})
 
         if(!cliente){
@@ -117,7 +119,8 @@ module.exports = class ClienteController{
             const token = getToken(req)
             const decodificado = jwt.verify(token,'mysecret')
             usuarioAtual = await Cliente.findById(decodificado.id)
-            currentUser.senha = undefined //segurança aqui: esvazia o retorno da senha
+            usuarioAtual.senha = undefined 
+            //segurança aqui: esvazia o retorno da senha
         } else{
             usuarioAtual= null
         }

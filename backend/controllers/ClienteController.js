@@ -107,9 +107,9 @@ module.exports = class ClienteController{
     }/* fim do login */
 
     //NOVO CÓDIGO A PARTIR DE 25/07/2024
-
     //Método (função) PARA VERIFICAR USUÁRIO
-    // métodos estáticos não precisam ter sua chamada definida em uma instância da classe
+    // métodos estáticos não precisam ter sua 
+    // chamada definida em uma instância da classe
     static async verificaUsuario(req, res){
         let usuarioAtual
 
@@ -127,5 +127,4 @@ module.exports = class ClienteController{
 
         res.status(200).send(usuarioAtual)
     }
-
 }/* fim da classe ClienteController  */

@@ -57,4 +57,12 @@ module.exports = class ProdutoController{
             res.status(500).json({mensagem: erro})
         }
     }/* fim do método cadastrar */
-}/* fim da classe ProdutoController  */
+
+    /* método buscarTodos (os produtos) */
+    static async buscarTodos(req,res){
+        const produtos = await Produto.find().sort('-createdAt')
+        res.status(200).json({
+          produtos: produtos  
+        })
+    }
+} /* fim da classe ProdutoController  */

@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-const Cliente = require('../models/Cliente')
-const bcrypt = require('bcrypt')
-const criarClienteToken = require('../helpers/cria-cliente-token')
-
-module.exports = class ClienteController{
-=======
 //IMPORTANDO MODEL PARA MONGODB DO CLIENTE 
 const Cliente = require('../models/Cliente')
 //IMPORTANDO MÓDULOS NECESSÁRIOS DO NODE 
-const bcrypt = require('bcrypt')
+
 const jwt = require('jsonwebtoken')
 
 // IMPORTANDO HELPERS
@@ -21,20 +14,15 @@ module.exports = class ClienteController{
     com a classe ClienteController  */
 
     /* MÉTODO REGISTRAR */
->>>>>>> meuNote
+
     static async registrar(req, res){
         const nome = req.body.nome
         const email = req.body.email
         const telefone = req.body.telefone
         const senha = req.body.senha
-<<<<<<< HEAD
-        const senhaconf = req.body.senhaconf
-=======
         const confsenha = req.body.confsenha
 
         /* Validações */
->>>>>>> meuNote
-
         if(!nome){
             res.status(422).json({mensagem: "O nome é obrigatório"})
             return
@@ -55,37 +43,6 @@ module.exports = class ClienteController{
             return
         }
 
-<<<<<<< HEAD
-        if(!senhaconf){
-            res.status(422).json({mensagem: "Confirme a senha"})
-            return
-        }
-
-        /* Verifica se cliente já está cadastrado */
-        const clienteExiste = await Cliente.findOne({email: email})
-
-        if (clienteExiste){
-            res.status(422).json({mensagem: "E-mail já cadastrado"})
-            return
-        }
-
-        /* Criação de senha */
-        const salt = await bcrypt.genSalt(12)
-        const senhaHash = await bcrypt.hash(senha,salt)
-
-        /* Adicionando o cliente ao bd */
-        const cliente = new Cliente({nome, email, telefone, 
-            senha: senhaHash })
-
-        try{
-            const novoCliente = await cliente.save()
-            await criarClienteToken(novoCliente, req, res)
-        } catch(erro){
-            res.status(500).json({mensagem: erro})
-        }
-    } /* Fim do método registrar */
-}
-=======
         if(!confsenha){
             res.status(422).json({mensagem: "A confirmação de senha é obrigatória"})
             return
@@ -171,4 +128,3 @@ module.exports = class ClienteController{
         res.status(200).send(usuarioAtual)
     }
 }/* fim da classe ClienteController  */
->>>>>>> meuNote
